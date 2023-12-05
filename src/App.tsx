@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect } from 'react';
 import Table from '@mui/material/Table';
@@ -8,6 +8,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import React from 'react';
+import { Movie } from './interfaces';
 
 
 function App() {
@@ -44,7 +46,7 @@ function App() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {movies.map((movie) => (
+            {movies.map((movie:Movie) => (
               <TableRow key={movie.title}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
