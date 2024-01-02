@@ -5,3 +5,6 @@ export interface Movie{
     SecondaryDescriptor:string;
 
 }
+export interface MovieData{
+    movies:Movie[];
+}
