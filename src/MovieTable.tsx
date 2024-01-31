@@ -58,6 +58,7 @@ function MovieTable(props: any){
           </TableBody>
         </Table>
       </TableContainer>
+      <Link to="/createmovie">Create Movie</Link>
    </div>
   )
 }

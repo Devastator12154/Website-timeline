@@ -9,6 +9,8 @@ import {
 import MoviePage from './MoviePage';
 import About from './About';
 import Root from './Root';
+import CreateMovie from './CreateMovie';
+
 
 
 
@@ -32,6 +34,10 @@ function App() {
           path: "/movies/:id",
           element: <MoviePage />,
           // loader: 
+        },
+        {
+          path: "/CreateMovie",
+          element: <CreateMovie />,
         },
       ],
     },

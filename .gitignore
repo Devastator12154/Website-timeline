@@ -23,3 +23,13 @@ yarn-debug.log*
 yarn-error.log*
 
 Backend/__pycache__
+
+*.log
+*.pot
+*.pyc
+__pycache__
+movie_backend/movie_backend/secret_key.py
+movie_backend/movie_backend/.pg_service.conf
+movie_backend/movie_backend/.my_pgpass
+movie_backend/movie_backend/database.py
+movie_backend/db.sqlite3
