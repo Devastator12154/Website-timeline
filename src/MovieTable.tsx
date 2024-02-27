@@ -17,14 +17,14 @@ import { Link, useLoaderData } from 'react-router-dom';
 
 
 export async function loader() {
-  return fetch("http://localhost:8000/movies").then(response =>
+  return fetch("http://localhost:8000/movies/api").then(response =>
   response.json()).then(data => data)
 }
 
 function MovieTable(props: any){
     const [movies, setMovies] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:8000/movies").then(response =>
+    fetch("http://localhost:8000/movies/api").then(response =>
       response.json()).then(data => setMovies(data))
   }, [])
   // const {movies} = useLoaderData() as MovieData;

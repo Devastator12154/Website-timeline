@@ -25,6 +25,7 @@ class MovieListApiView(APIView):
         '''
         Create the Todo with given todo data
         '''
+        print(request)
         data = {
             'title': request.data.get('title'), 
             'MainActors': request.data.get('MainActors'),
@@ -39,3 +40,54 @@ class MovieListApiView(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+class MovieDetailView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get_object(self, movie_id, user_id):
+        try:
+            return Movie.objects.get(id=movie_id, user=user_id)
+        
+        except Movie.DoesNotExist:
+            return None
+
+    def get(self, request, movie_id, *args, **kwargs):
+        print(movie_id, "Movie")
+        movieinstance = self.get_object(movie_id, request.user.id)
+        print(movieinstance)
+        if not movieinstance:
+            return Response({"res": "Not Found"}, status.HTTP_400_BAD_REQUEST)
+        serializer = MovieSerializer(movieinstance)
+        
+        return Response(serializer.data, status.HTTP_200_OK)
+    
+    def put(self, request, movie_id, *args, **kwargs):
+        
+        movieinstance = self.get_object(movie_id, request.user.id)
+        if not movieinstance:
+            return Response({"res": "Not Found"}, status.HTTP_400_BAD_REQUEST)
+        
+        data = {
+            'title': request.data.get('title'), 
+            'MainActors': request.data.get('MainActors'),
+            'Summary': request.data.get('Summary'),
+            'Genre': request.data.get('Genre'), 
+            'user': request.user.id
+        }
+        serializer = MovieSerializer(instance=movieinstance, data = data, partial = True)
+        
+        if serializer .is_valid():
+            serializer.save()
+            return Response(serializer.data, status.HTTP_200_OK)
+            
+        
+        return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+    def delete(self, request, movie_id, *args, **kwargs):
+        
+        movieinstance = self.get_object(movie_id, request.user.id)
+        if not movieinstance:
+            return Response({"res": "Not Found"}, status.HTTP_400_BAD_REQUEST)
+        movieinstance.delete()
+        return Response({"res": "Object Deleted"}, status.HTTP_200_OK)
+    
+        

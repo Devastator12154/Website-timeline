@@ -8,3 +8,6 @@ export interface Movie{
 export interface MovieData{
     movies:Movie[];
 }
+export interface UserToken{
+    token:string;
+}

@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import './App.css';
-import React from 'react';
+import React, { useState } from 'react';
 import MovieTable,{loader as movieloader} from './MovieTable';
 import {
   createBrowserRouter,
@@ -10,12 +10,14 @@ import MoviePage from './MoviePage';
 import About from './About';
 import Root from './Root';
 import CreateMovie from './CreateMovie';
-
+import useToken from './useToken';
+import Login from './Login';
 
 
 
 
 function App() {
+  const {token, setToken} = useToken()
   const router = createBrowserRouter([
     {
       path: "/",
@@ -42,6 +44,9 @@ function App() {
       ],
     },
   ]);
+  if (!token){
+    return <Login setToken={setToken}/>
+  }
   return (
     <div>
       
